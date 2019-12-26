@@ -162,13 +162,13 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          *
-         * tapyrus message start string is 0x01 0xFF 0xF0 0x00.
-         * testnet message start string is 0x75 0x9A 0x83 0x74. it is xor of mainnet header and testnet ascii codes.
+         * haw tapyrus network id is 721.
+         * message start string is 0x01 0xFF 0xF2 0xD0.
          */
         pchMessageStart[0] = 0x01;
         pchMessageStart[1] = 0xff;
-        pchMessageStart[2] = 0xf0;
-        pchMessageStart[3] = 0x00;
+        pchMessageStart[2] = 0xf2;
+        pchMessageStart[3] = 0xd0;
         nDefaultPort = 2357;  // 2357 is beautiful prime.
         nPruneAfterHeight = 100000;
 
@@ -178,75 +178,8 @@ public:
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
         // TODO: MUST change to seeder that is different of testnet. (ex: seed.tapyrus.chaintope.com, seed.tapyrus.com)
-        vSeeds.emplace_back("seed.tapyrus.dev.chaintope.com");
-        vSeeds.emplace_back("static-seed.tapyrus.dev.chaintope.com");
-
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,0);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,128);
-        base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
-        base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
-
-        bech32_hrp = "bc";
-
-        vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
-
-        fDefaultConsistencyChecks = false;
-        fRequireStandard = true;
-        fMineBlocksOnDemand = false;
-
-        /* disable fallback fee on mainnet */
-        m_fallback_fee_enabled = false;
-    }
-};
-
-
-/**
- * Paradium Main network
- */
-class CParadiumParams : public CChainParams {
-public:
-    CParadiumParams():CChainParams() {
-        strNetworkID = "paradium";
-        consensus.nSubsidyHalvingInterval = 210000;
-
-        consensus.nExpectedBlockTime = 15; // 15 sec
-        consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
-        consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
-        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
-
-        // Deployment of BIP68, BIP112, and BIP113.
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].bit = 0;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1462060800; // May 1st, 2016
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1493596800; // May 1st, 2017
-
-        // Deployment of SegWit (BIP141, BIP143, and BIP147)
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1479168000; // November 15th, 2016.
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1510704000; // November 15th, 2017.
-
-        /**
-         * Paradium networkId is 101.
-         * networkId=1 magic bytes is: 01 FF F0 00.
-         * thus, paradium magic byes is: 01 FF F0 64.
-         */
-        pchMessageStart[0] = 0x01;
-        pchMessageStart[1] = 0xff;
-        pchMessageStart[2] = 0xf0;
-        pchMessageStart[3] = 0x64;
-        nDefaultPort = 2357;  // 2357 is beautiful prime.
-        nPruneAfterHeight = 100000;
-
-        // Note that of those which support the service bits prefix, most only support a subset of
-        // possible options.
-        // This is fine at runtime as we'll fall back to using them as a oneshot if they don't support the
-        // service bits we want, but we should get them updated to support all service bits wanted by any
-        // release ASAP to avoid it where possible.
-        // TODO: MUST change to seeder that is different of testnet. (ex: seed.tapyrus.chaintope.com, seed.tapyrus.com)
-        vSeeds.emplace_back("seed.paradium.dev.chaintope.com");
-        vSeeds.emplace_back("static-seed.paradium.dev.chaintope.com");
+        vSeeds.emplace_back("ns-tapyrus.blockchain.haw.biz");
+        vSeeds.emplace_back("static-seed-tapyrus.blockchain.haw.biz");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -293,18 +226,17 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1462060800; // May 1st 2016
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1493596800; // May 1st 2017
 
-        pchMessageStart[0] = 0x75;
-        pchMessageStart[1] = 0x9a;
-        pchMessageStart[2] = 0x83;
-        pchMessageStart[3] = 0x74;
+        // this start bytes is different from main net.
+        pchMessageStart[0] = 0x02;
+        pchMessageStart[1] = 0xff;
+        pchMessageStart[2] = 0xf2;
+        pchMessageStart[3] = 0xd0;
         nDefaultPort = 12357;
         nPruneAfterHeight = 1000;
 
-        vFixedSeeds.clear();
-        vSeeds.clear();
+        vFixedSeeds.clear(); // haw tapyrus no have test network seed.
+        vSeeds.clear(); // haw tapyrus no have test network seed.
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("seed.tapyrus.dev.chaintope.com");
-        vSeeds.emplace_back("static-seed.tapyrus.dev.chaintope.com");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -387,8 +319,6 @@ std::unique_ptr<CChainParams> CreateChainParams(const std::string& chain)
 {
     if (chain == CBaseChainParams::MAIN)
         return std::unique_ptr<CChainParams>(new CMainParams());
-    else if (chain == CBaseChainParams::PARADIUM)
-        return std::unique_ptr<CChainParams>(new CParadiumParams());
     else if (chain == CBaseChainParams::TESTNET)
         return std::unique_ptr<CChainParams>(new CTestNetParams());
     else if (chain == CBaseChainParams::REGTEST)

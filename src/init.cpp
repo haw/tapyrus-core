@@ -342,12 +342,10 @@ static void OnRPCStopped()
 void SetupServerArgs()
 {
     const auto defaultBaseParams = CreateBaseChainParams(CBaseChainParams::MAIN);
-    const auto paradiumBaseParams = CreateBaseChainParams(CBaseChainParams::PARADIUM);
     const auto testnetBaseParams = CreateBaseChainParams(CBaseChainParams::TESTNET);
 
     //make sure ParseSignedBlockParameters was called before this call
     const auto defaultChainParams = CreateChainParams(CBaseChainParams::MAIN);
-    const auto paradiumChainParams = CreateChainParams(CBaseChainParams::PARADIUM);
     const auto testnetChainParams = CreateChainParams(CBaseChainParams::TESTNET);
 
     // Hidden Options

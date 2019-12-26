@@ -12,7 +12,6 @@
 #include <assert.h>
 
 const std::string CBaseChainParams::MAIN = "main";
-const std::string CBaseChainParams::PARADIUM = "paradium";
 const std::string CBaseChainParams::TESTNET = "test";
 const std::string CBaseChainParams::REGTEST = "regtest";
 
@@ -36,8 +35,6 @@ std::unique_ptr<CBaseChainParams> CreateBaseChainParams(const std::string& chain
 {
     if (chain == CBaseChainParams::MAIN)
         return MakeUnique<CBaseChainParams>("", 2377); // 3rd prime from 2357.
-    else if (chain == CBaseChainParams::PARADIUM)
-        return MakeUnique<CBaseChainParams>("paradium", 2377);
     else if (chain == CBaseChainParams::TESTNET)
         return MakeUnique<CBaseChainParams>("testnet3", 12377);
     else if (chain == CBaseChainParams::REGTEST)
